@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.bingheart.entity.User;
 import com.bingheart.service.UserService;
 import com.bingheart.util.Verification;
+import com.bingheart.util.date.LocalTime;
 import com.bingheart.util.url.pag.Page_Url;
 
 @Controller
@@ -53,76 +54,51 @@ public class UserController implements Page_Url{
     
     
     @	PostMapping(Page_Url.login_html)
-	public void login(String username,String password,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public  boolean Boolean(String username,String password,HttpServletRequest request,HttpServletResponse response) throws IOException {
         Object object = request.getSession().getAttribute("user");
     	if (object!=null) {
     		 response.sendRedirect(Page_Url.index_html);
+    		 return true;
 		}
     	User user = userService.getUser(username,password);
 		if(user==null) {
 			 response.sendRedirect("/login.html");
+			 return false;
 		}else {
 			request.getSession().setAttribute("user", user);
 		}
 		 response.sendRedirect(Page_Url.index_html);
+		 return true;
 	}
     
-    
-    /*
-    @GetMapping(Page_Url.login)
-	public String login() {
-		if(verification.if_sessionID()) {
-			return Page_Redirect.index;
-		}
-		return Page_Id.login;
-	}
-    
-    
-	@	PostMapping(Page_Url.login)
-	public String login(String email,String password) {
-        
-		if(verification.if_sessionID()) {
-			return Page_Redirect.index;
-		}
-		
-		User user = userService.getUser(email,password);
-		if(user==null) {
-			return Page_Redirect.login;
-		}else {
-		    verification.getSession().setAttribute("user", user);
-			return Page_Redirect.index;
-		}
-
-	}
-	
-
-	
-	@GetMapping("/register.html")
-	public String register() {
-		if(verification.if_sessionID()) {
-			return Page_Redirect.index;
-		}
-		return Page_Id.login;
-	}
-	
-	@PostMapping("/register.html")
-	public String register(String login_name,String user_pass,String nick_name,String mail) {
-		
-		if(verification.if_sessionID()) {
-			return Page_Redirect.index;
+    @PostMapping("/register.html")
+	public void register(String user_pass,String nick_name,String mail,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        Object object = request.getSession().getAttribute("user");
+    	if (object!=null) {
+    		 response.sendRedirect(Page_Url.index_html);
 		}
 		User user = new User();
-		user.setLogin_name(login_name);
+		user.setLogin_name(mail);
 		user.setUser_pass(user_pass);
 		user.setNick_name(nick_name);
-		user.setRole_id(1);
 		user.setIn_date(LocalTime.getDate());
 		user.setLast_login_date(LocalTime.getDate());
 		user.setStatus(1);
 		user.setMail(mail);
 		userService.setUser(user);
-	    return login(login_name,user_pass);
-	}*/
+		User user1 = userService.getUser(mail,user_pass);
+		if(user1==null) {
+			 response.sendRedirect("/register.html");
+		}else {
+			 request.getSession().setAttribute("user", user);
+			 response.sendRedirect(Page_Url.index_html);
+		}
+		
+	}
+    
+    
+    
+
 	
 
 }

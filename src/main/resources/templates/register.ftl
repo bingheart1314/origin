@@ -18,19 +18,19 @@
 	<h1>会员注册</h1>
 	<div class="homepage"><a href="http://m4.demo.17mb.net/">首页</a></div>
 </div>
-<form action="http://m4.demo.17mb.net/register.php" method="post" onsubmit="return checkInput();">
+<form action="/register.html" method="post" onsubmit="return checkInput();">
 <div class="login">
 	<div class="loginblock">
-    	<p class="l">帐号：</p>
-        <div class="r"><input id="username" name="username" type="text" size="20" maxlength="30" class="p1"></div>
+    	<p class="l">昵称：</p>
+        <div class="r"><input id="username" name="nick_name" type="text" size="20" maxlength="30" class="p1"></div>
     </div>
     <div class="loginblock">
     	<p class="l">密码：</p>
-        <div class="r"><input id="password" name="password" size="20" maxlength="30" type="password" class="p1"></div>
+        <div class="r"><input id="password" name="user_pass" size="20" maxlength="30" type="password" class="p1"></div>
     </div>
 	<div class="loginblock">
     	<p class="l">邮箱：</p>
-        <div class="r"><input id="email" name="email" type="text" size="20" maxlength="40" class="p1"></div>
+        <div class="r"><input id="email" name="mail" type="text" size="20" maxlength="40" class="p1"></div>
     </div>
     <div class="loginblock logincode">
         <p class="l">验证码：</p>
