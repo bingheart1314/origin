@@ -26,10 +26,7 @@ public class UserController implements Page_Url{
     @Autowired
 	private Verification verification;
     
-    @	RequestMapping(Page_Url.index_html)
-	public String index() {
-		return Page_Url.index;
-	}
+
     
     @GetMapping(Page_Url.login_html)
 	public String login(HttpServletRequest request,HttpServletResponse response) throws IOException {
@@ -54,21 +51,22 @@ public class UserController implements Page_Url{
     
     
     @	PostMapping(Page_Url.login_html)
-	public  boolean Boolean(String username,String password,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public  void Boolean(String username,String password,HttpServletRequest request,HttpServletResponse response) throws IOException {
         Object object = request.getSession().getAttribute("user");
     	if (object!=null) {
     		 response.sendRedirect(Page_Url.index_html);
-    		 return true;
+    		 return;
 		}
     	User user = userService.getUser(username,password);
 		if(user==null) {
 			 response.sendRedirect("/login.html");
-			 return false;
+			 return;
 		}else {
 			request.getSession().setAttribute("user", user);
 		}
 		 response.sendRedirect(Page_Url.index_html);
-		 return true;
+		 return;
+
 	}
     
     @PostMapping("/register.html")

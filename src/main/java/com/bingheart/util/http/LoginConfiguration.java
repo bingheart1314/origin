@@ -5,14 +5,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
- * Created with logindemo.
- * Author: dreamer-1
- * Email: zhong--lei@outllok.com
- * Date: 2018/5/13
- * Time: 下午2:58
- * Description:
- */
+
 @Configuration
 public class LoginConfiguration implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
@@ -29,6 +22,8 @@ public class LoginConfiguration implements WebMvcConfigurer {
         loginRegistry.excludePathPatterns("/login.html");
         loginRegistry.excludePathPatterns("/index.html");
         loginRegistry.excludePathPatterns("/register.html");
+        loginRegistry.excludePathPatterns("/author.html");
+        loginRegistry.excludePathPatterns("/classification.html");
         // 排除资源请求
         loginRegistry.excludePathPatterns("/**/*.css");
         loginRegistry.excludePathPatterns("/**/*.js");

@@ -11,6 +11,7 @@ public class Novel {
 	private Double recommend;
 	private String narration;
 	private double click_number;
+	private String novel_type_name;
 	private String update_url;
 	private String img;
 	public int getNovel_id() {
@@ -72,5 +73,11 @@ public class Novel {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public String getNovel_type_name() {
+		return novel_type_name;
+	}
+	public void setNovel_type_name(String novel_type_name) {
+		this.novel_type_name = novel_type_name;
 	}
 }
